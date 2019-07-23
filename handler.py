@@ -1,6 +1,6 @@
 import json
 import boto3
-from lib import requests
+import requests
 from datetime import datetime, timedelta
 
 client = boto3.client("cloudwatch", region_name='us-east-1')

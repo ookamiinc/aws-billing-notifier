@@ -28,6 +28,8 @@ provider:
   region: ${self:custom.region}
   timeout: 600
 
+plugins:
+  - serverless-python-requirements
 # you can add statements to the Lambda function's IAM Role here
 #  iamRoleStatements:
 #    - Effect: "Allow"

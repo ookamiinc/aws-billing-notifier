@@ -69,7 +69,7 @@ aws_secret_access_key=[your secret here]
 
 ## 2. Usage
 You can set slack notification url and channel in `serverless.yml`.  
-Please modify functions.billing_estimate.events.schedule.input .  
+Please modify `functions.billing_estimate.events.schedule.input` .  
 The default corn job is set on Sundays and Wednesdays.   
 You can also change the frequency.  
 

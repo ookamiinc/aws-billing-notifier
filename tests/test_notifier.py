@@ -165,8 +165,8 @@ class NotifierTest(unittest.TestCase):
             return_value=billing_json)
         output = {'attachments':
                   [
-                      {'fallback': '今月のAWSの利用費は、1557.99USDです。',
-                       'pretext': '今月のAWSの利用費は、1557.99USDです。',
+                      {'fallback': '今月のAWSの利用費は、1,558.0 USDです。',
+                       'pretext': '今月のAWSの利用費は、1,558.0 USDです。',
                        'color': 'good', 'fields':
                        [
                            {'title': 'awskms', 'value': '1,558.0 USD', 'short': 'true'},

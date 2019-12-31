@@ -33,7 +33,10 @@ def send_slack(url, channel, payload):
 
 def get_latest_billing(serviceName):
     response = get_service_billing(serviceName)
-    return response["Datapoints"][0]
+    if len(response["Datapoints"]) > 0:
+        return response["Datapoints"][0]
+    else:
+        return {"Average": 0}
 
 
 def get_services():

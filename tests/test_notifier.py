@@ -17,6 +17,16 @@ class NotifierTest(unittest.TestCase):
         handler.client.get_metric_statistics = MagicMock(return_value=billing_json)
         self.assertEqual(handler.message_payload(), expected_message_payload)
 
+    def test_message_payload_without_datapoints_content(self):
+        handler.client.list_metrics = MagicMock(return_value=services_json)
+        handler.client.get_metric_statistics = MagicMock(
+            return_value=billing_without_datapoints_json
+        )
+        self.assertEqual(
+            handler.message_payload(),
+            expected_message_payload_without_datapoints_content,
+        )
+
     def test_send_slack(self):
         url = "sample url"
         channel = "sample channel"
@@ -224,6 +234,22 @@ billing_json = {
     },
 }
 
+billing_without_datapoints_json = {
+    "Label": "EstimatedCharges",
+    "Datapoints": [],
+    "ResponseMetadata": {
+        "RequestId": "aae332f4-a82a-11e9-843e-2319aa9bda51",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+            "x-amzn-requestid": "aae332f4-a82a-11e9-843e-2319aa9bda51",
+            "content-type": "text/xml",
+            "content-length": "500",
+            "date": "Wed, 17 Jul 2019 00:34:42 GMT",
+        },
+        "RetryAttempts": 0,
+    },
+}
+
 expected_message_payload = {
     "attachments": [
         {
@@ -254,6 +280,37 @@ expected_message_payload = {
                 {"title": "AmazonEC2", "value": "1,558.0 USD", "short": "true"},
                 {"title": "AWSBudgets", "value": "1,558.0 USD", "short": "true",},
                 {"title": "AmazonCloudFront", "value": "1,558.0 USD", "short": "true",},
+            ],
+        }
+    ]
+}
+
+expected_message_payload_without_datapoints_content = {
+    "attachments": [
+        {
+            "fallback": "今月のAWSの利用費は、0.0 USDです。",
+            "pretext": "今月のAWSの利用費は、0.0 USDです。",
+            "color": "good",
+            "fields": [
+                {"title": "awskms", "value": "0.0 USD", "short": "true"},
+                {"title": "AmazonRDS", "value": "0.0 USD", "short": "true"},
+                {"title": "AWSLambda", "value": "0.0 USD", "short": "true"},
+                {"title": "AmazonSageMaker", "value": "0.0 USD", "short": "true",},
+                {"title": "AWSConfig", "value": "0.0 USD", "short": "true"},
+                {"title": "awswaf", "value": "0.0 USD", "short": "true"},
+                {"title": "AWSDataTransfer", "value": "0.0 USD", "short": "true",},
+                {"title": "AWSSecretsManager", "value": "0.0 USD", "short": "true",},
+                {"title": "AmazonSES", "value": "0.0 USD", "short": "true"},
+                {"title": "AmazonSNS", "value": "0.0 USD", "short": "true"},
+                {"title": "AmazonS3", "value": "0.0 USD", "short": "true"},
+                {"title": "AmazonRoute53", "value": "0.0 USD", "short": "true",},
+                {"title": "AWSCloudTrail", "value": "0.0 USD", "short": "true",},
+                {"title": "AmazonStates", "value": "0.0 USD", "short": "true",},
+                {"title": "AWSMarketplace", "value": "0.0 USD", "short": "true",},
+                {"title": "AmazonCloudWatch", "value": "0.0 USD", "short": "true",},
+                {"title": "AmazonEC2", "value": "0.0 USD", "short": "true"},
+                {"title": "AWSBudgets", "value": "0.0 USD", "short": "true",},
+                {"title": "AmazonCloudFront", "value": "0.0 USD", "short": "true",},
             ],
         }
     ]

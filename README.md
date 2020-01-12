@@ -20,6 +20,7 @@ eval "$(pyenv init -)"
 #### Install Python
 
 This project is using Python 3.6
+Please check the exact version in [.python-version](.python-version)
 
 ```
 $ pyenv install 3.6
@@ -47,13 +48,13 @@ $ pipenv sync --dev
 ### Install package manager
 
 ```
-$ brew install npm
+$ brew install yarn
 ```
 
 ### Setup serverless
 
 ```
-$ npm install
+$ yarn install
 $ ./node_modules/serverless/bin/serverless config credentials --provider aws --key 'YOUR_AWS_ACCESS_KEY_ID' --secret 'YOUR_AWS_SECRET_ACCESS_KEY'
 ```
 
@@ -78,6 +79,6 @@ You can also change the frequency.
 Make sure you pull recent changes.
 
 ```
-$ ./node_modules/serverless/bin/serverless deploy -v --stage production
+$ ./node_modules/serverless/bin/serverless deploy -v --stage dev
 ```
 

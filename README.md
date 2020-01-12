@@ -47,13 +47,13 @@ $ pipenv sync --dev
 ### Install package manager
 
 ```
-$ brew install npm
+$ brew install yarn
 ```
 
 ### Setup serverless
 
 ```
-$ npm install
+$ yarn install
 $ ./node_modules/serverless/bin/serverless config credentials --provider aws --key 'YOUR_AWS_ACCESS_KEY_ID' --secret 'YOUR_AWS_SECRET_ACCESS_KEY'
 ```
 

@@ -20,6 +20,7 @@ eval "$(pyenv init -)"
 #### Install Python
 
 This project is using Python 3.6
+Please check the exact version in [.python-version](.python-version)
 
 ```
 $ pyenv install 3.6

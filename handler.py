@@ -10,7 +10,7 @@ def get_service_billing(serviceName):
     start_time = datetime.now() - timedelta(days=1)
     end_time = datetime.now()
     dimensions = [{"Name": "Currency", "Value": "USD"}]
-    if serviceName is not "Total":
+    if serviceName != "Total":
         dimensions.append({"Name": "ServiceName", "Value": serviceName})
     response = client.get_metric_statistics(
         Namespace="AWS/Billing",
@@ -25,7 +25,7 @@ def get_service_billing(serviceName):
 
 
 def send_slack(url, channel, payload):
-    if channel is not "":
+    if channel != "":
         payload["channel"] = channel
     data = json.dumps(payload)
     requests.post(url, data)

@@ -19,12 +19,12 @@ eval "$(pyenv init -)"
 
 #### Install Python
 
-This project is using Python 3.6
+This project is using Python 3.11
 Please check the exact version in [.python-version](.python-version)
 
 ```
-$ pyenv install 3.6
-$ pyenv global 3.6
+$ pyenv install 3.11
+$ pyenv global 3.11
 ```
 
 #### Install pipenv

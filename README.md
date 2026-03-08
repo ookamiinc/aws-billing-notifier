@@ -55,7 +55,7 @@ $ brew install yarn
 
 ```
 $ yarn install
-$ ./node_modules/serverless/bin/serverless config credentials --provider aws --key 'YOUR_AWS_ACCESS_KEY_ID' --secret 'YOUR_AWS_SECRET_ACCESS_KEY'
+$ ./node_modules/.bin/serverless config credentials --provider aws --key 'YOUR_AWS_ACCESS_KEY_ID' --secret 'YOUR_AWS_SECRET_ACCESS_KEY'
 ```
 
 #### Use below steps If you have troubles above
@@ -79,6 +79,6 @@ You can also change the frequency.
 Make sure you pull recent changes.
 
 ```
-$ ./node_modules/serverless/bin/serverless deploy -v --stage dev
+$ ./node_modules/.bin/serverless deploy -v --stage dev
 ```
 

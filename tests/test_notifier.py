@@ -27,6 +27,41 @@ class NotifierTest(unittest.TestCase):
             expected_message_payload_without_datapoints_content,
         )
 
+    def test_get_services_deduplicates(self):
+        duplicated_services_json = {
+            "Metrics": [
+                {
+                    "Namespace": "AWS/Billing",
+                    "MetricName": "EstimatedCharges",
+                    "Dimensions": [
+                        {"Name": "ServiceName", "Value": "AmazonEC2"},
+                        {"Name": "Currency", "Value": "USD"},
+                    ],
+                },
+                {
+                    "Namespace": "AWS/Billing",
+                    "MetricName": "EstimatedCharges",
+                    "Dimensions": [
+                        {"Name": "ServiceName", "Value": "AmazonEC2"},
+                        {"Name": "LinkedAccount", "Value": "123456789"},
+                        {"Name": "Currency", "Value": "USD"},
+                    ],
+                },
+                {
+                    "Namespace": "AWS/Billing",
+                    "MetricName": "EstimatedCharges",
+                    "Dimensions": [
+                        {"Name": "ServiceName", "Value": "AmazonS3"},
+                        {"Name": "Currency", "Value": "USD"},
+                    ],
+                },
+            ],
+            "ResponseMetadata": {"RequestId": "test", "HTTPStatusCode": 200, "HTTPHeaders": {}, "RetryAttempts": 0},
+        }
+        handler.client.list_metrics = MagicMock(return_value=duplicated_services_json)
+        services = handler.get_services()
+        self.assertEqual(services, ["AmazonEC2", "AmazonS3"])
+
     def test_send_slack(self):
         url = "sample url"
         channel = "sample channel"

@@ -43,12 +43,13 @@ def get_services():
     response = client.list_metrics(
         Namespace="AWS/Billing", MetricName="EstimatedCharges"
     )
-    services = []
-    for r in response["Metrics"]:
-        for d in r["Dimensions"]:
-            if d["Name"] == "ServiceName":
-                services.append(d["Value"])
-    return services
+    services = dict.fromkeys(
+        d["Value"]
+        for r in response["Metrics"]
+        for d in r["Dimensions"]
+        if d["Name"] == "ServiceName"
+    )
+    return list(services)
 
 
 def get_billings():

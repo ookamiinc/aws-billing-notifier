@@ -79,6 +79,6 @@ You can also change the frequency.
 Make sure you pull recent changes.
 
 ```
-$ ./node_modules/.bin/serverless deploy -v --stage dev
+$ ./node_modules/.bin/serverless deploy --verbose --stage dev
 ```
 
